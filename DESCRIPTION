@@ -1,12 +1,12 @@
 Package: gptchatteR
 Type: Package
-Title: R ChatGPR Wrapper
 Version: 0.1.0
 Author: Isin Altinkaya, ChatGPT
 Maintainer: Isin Altinkaya <isinaltinkaya@sund.ku.dk>
-Title: R wrapper for the OpenAI GPT-3 model
+Title: R wrapper for the OpenAI GPT chatter
 Description: The chatgptr package provides an R interface to the OpenAI GPT-3 model, allowing users to generate responses to user input in a streaming manner. The package includes functions for setting up the API key, loading the GPT-3 model, and generating responses to user input with adjustable temperature and maximum token limits.
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 Imports: openai
+RoxygenNote: 7.2.2
