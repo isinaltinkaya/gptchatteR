@@ -50,6 +50,8 @@
 # Load necessary packages
 #'
 
+
+
 #' Authenticate chatter with an OpenAI secret key
 #'
 #' This function can be used to authenticate a user with an OpenAI
@@ -65,6 +67,7 @@
 #'
 #' @export
 #'
+#' 
 chatter.auth <- function(openai_secret_key = NULL) {
   if (is.null(openai_secret_key)) {
     stop(paste0(
@@ -155,7 +158,7 @@ chatter.create <- function(model = "text-davinci-003",
 
 
 
-#'
+
 #' This function enables users to chat with the chatterbot.
 #' @param input A string of text inputted by the user.
 #' @param echo A logical indicating whether to echo the input.
@@ -166,6 +169,7 @@ chatter.create <- function(model = "text-davinci-003",
 #' @export
 #' @examples
 #' chatter.chat("Hello, how are you?")
+#' 
 chatter.feed <- function(new_input) {
   chatter$input <<- paste0(chatter$input, "\n", new_input)
   chatter$fed <<- chatter$fed + 1
@@ -200,8 +204,7 @@ chatter.chat <- function(input, echo = FALSE, return_response = FALSE, feed = FA
       model = chatter$model,
       temperature = chatter$temperature,
       max_tokens = chatter$max_tokens,
-      echo = echo, ...
-    )
+      echo = echo)
     if (return_response) {
       return(response)
     } else {
@@ -216,7 +219,7 @@ chatter.chat <- function(input, echo = FALSE, return_response = FALSE, feed = FA
       model = chatter$model,
       temperature = chatter$temperature,
       max_tokens = chatter$max_tokens,
-      echo = echo,  , ...
+      echo = echo, ...
     )
     if (return_response) {
       return(response)
@@ -236,6 +239,7 @@ chatter.chat <- function(input, echo = FALSE, return_response = FALSE, feed = FA
 #' @export
 #' @examples
 #' chatter.plot("Draw a line graph of x and y.")
+#' #'
 chatter.plot <- function(input, echo = FALSE, feed = FALSE, run = FALSE, ...) {
   input <- paste0("Use R for plotting. Only include the code in your replies.\n", input, "\n")
   # if we should feed and plot at the same time

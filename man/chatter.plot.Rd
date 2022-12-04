@@ -25,4 +25,5 @@ This function enables users to plot graphs with the chatterbot.
 }
 \examples{
 chatter.plot("Draw a line graph of x and y.")
+#'
 }

@@ -25,4 +25,5 @@ This function enables users to chat with the chatterbot.
 }
 \examples{
 chatter.chat("Hello, how are you?")
+
 }
