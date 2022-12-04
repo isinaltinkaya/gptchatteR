@@ -11,7 +11,7 @@
 #' interacting with the openai GPT-3 language processing model.
 #' With gptchatteR, users can easily send messages to GPT-3 and receive
 #' human-like responses in return. gptchatteR is easy to use and requires
-#' no prior knowledge of GPT-3 or natural language processing. Simply 
+#' no prior knowledge of GPT-3 or natural language processing. Simply
 #' install the package, authenticate with your openAI API key, and start
 #' sending messages to GPT-3. The package also includes functions for
 #' processing and displaying the generated responses.
@@ -48,13 +48,7 @@
 # Load necessary packages
 library(openai)
 
-
-chatter.create <- function(input,
-                           openai_secret_key = NULL,
-                           model = "text-davinci-003",
-                           temperature = 0.5,
-                           max_tokens = 100,
-                           ...) {
+chatter.auth <- function(openai_secret_key = NULL) {
   if (is.null(openai_secret_key)) {
     stop(paste0(
       "\n\n[ERROR]:",
@@ -68,14 +62,38 @@ chatter.create <- function(input,
       "\n\tStep 4: On the left side of the page, click on 'API Keys'",
       "\n\tStep 5: Click 'Create new secret key'",
       "\n\tStep 6: Copy your API key and use as below:",
-      "\n\t\tchatter.create(openai_secret_key=\"MY_SECRET_KEY\")",
+      "\n\t\tchatter.auth(openai_secret_key=\"MY_SECRET_KEY\")",
+      "\n\t "
+    ))
+  }
+  Sys.setenv(openai_secret_key = openai_secret_key)
+}
+
+
+
+chatter.create <- function(model = "text-davinci-003",
+                           temperature = 0.5,
+                           max_tokens = 100,
+                           ...) {
+  if (Sys.getenv("openai_secret_key") == "" || is.na(Sys.getenv("openai_secret_key"))) {
+    stop(paste0(
+      "\n\n[ERROR]:",
+      "'openai_secret_key' is not defined.",
+      "\n\n-> You need to provide an OpenAI secret key.\n\n",
+      "Example: chatter.create(openai_secret_key=\"lbkFJuMOwtvGYKOWzYJsFNw2L\")",
+      "\n\n\nTo get your OpenAI API key:",
+      "\n\tStep 1: Visit the OpenAI website at https://beta.openai.com/ and click 'Sign Up'",
+      "\n\tStep 2: Enter your information and click 'Create Account'",
+      "\n\tStep 3: Log in to your account",
+      "\n\tStep 4: On the left side of the page, click on 'API Keys'",
+      "\n\tStep 5: Click 'Create new secret key'",
+      "\n\tStep 6: Copy your API key and use as below:",
+      "\n\t\tchatter.auth(openai_secret_key=\"MY_SECRET_KEY\")",
       "\n\t "
     ))
   }
 
-  Sys.setenv(openai_secret_key = openai_secret_key)
 
-  cat("\n-> Chatter is created.\n\n")
 
   chatter <<- structure(
     list(
@@ -168,4 +186,5 @@ chatter.create <- function(input,
       }
     }
   }
+  cat("\n-> Chatter created.\n\n")
 }
