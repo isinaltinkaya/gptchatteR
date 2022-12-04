@@ -28,9 +28,6 @@ This function allows the user to chat with a given model.
 chatter.chat("Hi there!")
 
 }
-\references{
-OpenAI, GPT-2 (2019). \url{https://openai.com/blog/better-language-models/}
-}
 \seealso{
 \code{\link[openai]{create_completion}}
 }

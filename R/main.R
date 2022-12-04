@@ -191,17 +191,15 @@ chatter.feed <- function(new_input) {
 #'
 #' @seealso \code{\link[openai]{create_completion}}
 #'
-#' @references
-#' OpenAI, GPT-2 (2019). \url{https://openai.com/blog/better-language-models/}
 chatter.chat <- function(input, echo = FALSE, return_response = FALSE, feed = FALSE, ...) {
   # if we should feed and chat at the same time
   if (feed) {
     chatter.feed(input)
     response <- openai::create_completion(
       prompt = chatter$input,
-      model = model,
-      temperature = temperature,
-      max_tokens = max_tokens,
+      model = chatter$model,
+      temperature = chatter$temperature,
+      max_tokens = chatter$max_tokens,
       echo = echo, ...
     )
     if (return_response) {
@@ -215,10 +213,10 @@ chatter.chat <- function(input, echo = FALSE, return_response = FALSE, feed = FA
     new_input <- paste0(chatter$input, "\n", input, "\n")
     response <- openai::create_completion(
       prompt = new_input,
-      model = model,
-      temperature = temperature,
-      max_tokens = max_tokens,
-      echo = echo, ...
+      model = chatter$model,
+      temperature = chatter$temperature,
+      max_tokens = chatter$max_tokens,
+      echo = echo,  , ...
     )
     if (return_response) {
       return(response)
@@ -245,9 +243,9 @@ chatter.plot <- function(input, echo = FALSE, feed = FALSE, run = FALSE, ...) {
     chatter.feed(input)
     response <- openai::create_completion(
       prompt = chatter$input,
-      model = model,
-      temperature = temperature,
-      max_tokens = max_tokens,
+      model = chatter$model,
+      temperature = chatter$temperature,
+      max_tokens = chatter$max_tokens,
       echo = echo, ...
     )
     if (run) {
@@ -262,9 +260,9 @@ chatter.plot <- function(input, echo = FALSE, feed = FALSE, run = FALSE, ...) {
     new_input <- paste0(chatter$input, "\n", input, "\n")
     response <- openai::create_completion(
       prompt = new_input,
-      model = model,
-      temperature = temperature,
-      max_tokens = max_tokens,
+      model = chatter$model,
+      temperature = chatter$temperature,
+      max_tokens = chatter$max_tokens,
       echo = echo, ...
     )
     if (run) {
