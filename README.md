@@ -25,13 +25,47 @@ library(gptchatteR)
 And that's it! The gptchatteR package should now be installed and ready to use. 
 You can authenticate with your openai API key using the `chatter.auth` function, create a chatter with `chatter.create` function, and start sending messages to GPT-3 using the `chatter.chat` function. For more information and examples, see the gptchatteR package documentation and tutorials.
 
-```
-chatter.auth("YOUR_SECRET_KEY")
+```R
+# Load the devtools package
+library(devtools)
+
+# Install the gptchatteR package from GitHub using the devtools package
+install_github("isinaltinkaya/gptchatteR")
+
+# Load the gptchatteR package
+library(gptchatteR)
+
+# Authenticate using your API key
+chatter.auth("sk-qGTnjsCI8mZkCtvXVe6SUSEYOUROWNKEY")
+
+# Create a new chat session 
 chatter.create()
-chatter.chat("Hi!")
-chatter.feed("I have a dataframe df with 3 columns A B C")
-cplot <- chatter.plot("plot a scatterplot with B on x axis, A on y axis, color is C" )
-cplot$plot
+```
+
+## Example 1
+
+```R
+# Create test data
+df <- data.frame(A=seq(1,10,1),B=seq(10,19,1))
+
+# Feed the chatter instance
+chatter.feed("I have a dataframe named df. It has two columns: A and B")
+
+# Save the chatter response object
+cp <- chatter.plot("Plot a scatterplot where x axis is A, y is B")
+```
+
+```R
+# Create a test data frame
+library(tidyverse)
+rt <- rnorm(1000, mean=700, sd=100) # Generate RT data
+df <- tibble(RT = rt, group = rep(c("low", "high"), each=500))
+
+# Feed the data frame information to the chat session
+chatter.feed("I have a dataframe df")
+
+# Use the chatter.plot function to create a histogram
+chatter.plot("plot histogram of rt using ggplot with df")
 ```
 
 ### Acknowledgements: 
