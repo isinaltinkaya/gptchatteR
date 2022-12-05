@@ -23,3 +23,5 @@ library(gptchatteR)
 ```
 
 And that's it! The gptchatteR package should now be installed and ready to use. You can authenticate with your openai API key using the gptchatteR_auth function, create a chatter with chatter.create function, and start sending messages to GPT-3 using the gptchatteR_schat function. For more information and examples, see the gptchatteR package documentation and tutorials.
+
+Acknowledgements: ChatGPT helped ...

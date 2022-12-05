@@ -32,7 +32,6 @@ Create an OpenAI chatterbot
 \examples{
 
 chatter.auth(openai_secret_key = "MY_SECRET_KEY")
-chat
 
 }
 \seealso{
