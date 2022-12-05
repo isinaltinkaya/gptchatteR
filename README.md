@@ -55,6 +55,8 @@ chatter.feed("I have a dataframe named df. It has two columns: A and B")
 cp <- chatter.plot("Plot a scatterplot where x axis is A, y is B")
 ```
 
+## Example 2
+
 ```R
 # Create a test data frame
 library(tidyverse)
