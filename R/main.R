@@ -86,7 +86,6 @@ chatter.auth <- function(openai_secret_key = NULL) {
 }
 
 
-
 #' Create an OpenAI chatterbot
 #'
 #' @param model The OpenAI model to use (default is \code{text-davinci-003})
@@ -229,11 +228,3 @@ chatter.create <- function(model = "text-davinci-003",
   }
   cat("\n-> Chatter created.\n\n")
 }
-
-
-openai::create_completion(
-  prompt = "hey",
-  engine_id = chatter$model,
-  temperature = chatter$temperature,
-  max_tokens = chatter$max_tokens,
-)
