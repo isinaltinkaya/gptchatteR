@@ -4,58 +4,120 @@ An experimental and unofficial wrapper for interacting with ChatGPT in R.
 
 ## Installation
 
-### Prerequisites
-Install the devtools package by running the following command in your R console:
+### &#8594; Prerequisites
+Install the devtools and openai packages:
 
 ```R
-install.packages("devtools", "openai")
-#Load the devtools package by running the following command in your R console:
+install.packages(c("devtools", "openai"))
+```
+
+Load the `devtools` package:
+```R
 library(devtools)
 ```
 
-Install the gptchatteR package from the isinaltinkaya GitHub repository by running the following command in your R console:
+### &#8594; Install the gptchatteR package
+
 ```r
 install_github("isinaltinkaya/gptchatteR")
 ```
-Load the gptchatteR package by running the following command in your R console:
+
+## Quickstart 
+
+### &#8594; Prepare the chatter
+
+Load the gptchatteR package:
+
 ```R
 library(gptchatteR)
 ```
 
-And that's it! The gptchatteR package should now be installed and ready to use. 
-You can authenticate with your openai API key using the `chatter.auth` function, create a chatter with `chatter.create` function, and start sending messages to GPT-3 using the `chatter.chat` function. For more information and examples, see the gptchatteR package documentation and tutorials.
+Authenticate the chatter with your openai API key using the `chatter.auth` function.
 
 ```R
-# Load the devtools package
-library(devtools)
-
-# Install the gptchatteR package from GitHub using the devtools package
-install_github("isinaltinkaya/gptchatteR")
-
-# Load the gptchatteR package
-library(gptchatteR)
-
-# Authenticate using your API key
 chatter.auth("sk-qGTnjsCI8mZkCtvXVe6SUSEYOUROWNKEY")
+```
 
-# Create a new chat session 
+Create a new chatter session with `chatter.create` function.
+
+
+```
 chatter.create()
 ```
 
-## Example 1
+Your chatter is now ready for use! 
+
+
+## Usage
 
 ```R
-# Create test data
-df <- data.frame(A=seq(1,10,1),B=seq(10,19,1))
+library(gptchatteR)
+```
 
-# Feed the chatter instance
+### &#8594; Casual chat
+
+You can use the `chatter.chat` function to send messages to ChatGPT and receive responses:
+
+```R
+chatter.chat("Hello, ChatGPT!")
+```
+
+### &#8594; Plot with chatter
+
+The `chatter.plot` function can be used to generate plots based on the input data and the ChatGPT response. For example, to create a scatterplot of a dataframe named df with columns A and B, you could use the following code:
+
+```R
 chatter.feed("I have a dataframe named df. It has two columns: A and B")
-
-# Save the chatter response object
 cp <- chatter.plot("Plot a scatterplot where x axis is A, y is B")
 ```
 
-## Example 2
+View the plot:
+
+```R
+cp$plot
+```
+
+View the R code:
+
+```R
+cp$command
+```
+
+
+### &#8594; Feed the chatter
+
+The `chatter.feed` function can be used to provide the chatter session with information that can be used in future responses. This can be useful if you want the chatter to have access to specific data or context when generating a response.
+
+You can also use the `chatter.chat` function with `feed=TRUE` to make the chatter remember the information in your message for future use. For example:
+
+```R
+# Use the chatter.chat function with the feed argument set to TRUE 
+# to make the chatter remember this information for future use
+# and respond at the same time.
+chatter.chat("I have a dataframe named df. It has two columns: A and B. What are my column names?",feed=TRUE)
+
+# This will make the chatter remember that the dataframe has two 
+# columns named A and B, and it will use this information when generating 
+# its response to the question.
+cp <- chatter.plot("Plot a scatterplot with x axis A and y axis B.")
+
+# View the plot
+cp$plot
+
+# View the code
+cp$command
+
+# Make chatter run the plot code. This saves time if you are just
+# trying it, but will not save the command returned by the chatter.
+chatter.plot("Plot a scatterplot with x axis A and y axis B.", run=TRUE)
+
+
+# Alternatively, just do both at the same time!
+cp <- chatter.plot("Plot a scatterplot with x axis A and y axis B.", run=TRUE)
+# Plot is also displayed, as well as saved to cp
+```
+
+## Example
 
 ```R
 # Create a test data frame
@@ -70,5 +132,5 @@ chatter.feed("I have a dataframe df")
 chatter.plot("plot histogram of rt using ggplot with df")
 ```
 
-### Acknowledgements: 
-ChatGPT
+Acknowledgements
+This package uses OpenAI's ChatGPT model, which is an implementation of the GPT-3 architecture. Thank you to OpenAI for making this technology available to the public. ChatGPT also helped me write this file.
