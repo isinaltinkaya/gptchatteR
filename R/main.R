@@ -190,7 +190,7 @@ chatter.create <- function(model = "text-davinci-003",
 
 
   chatter.plot <<- function(input, echo = FALSE, feed = FALSE, run = FALSE, ...) {
-    input <- paste0("Use R for plotting. Only include the code in your replies.\n", input, "\n")
+    input <- paste0("Use R. Do not include '<code>' in the reply. Only reply with code.\n", input, "\n")
     # if we should feed and plot at the same time
     if (feed) {
       chatter.feed(input)
@@ -205,7 +205,7 @@ chatter.create <- function(model = "text-davinci-003",
         eval(parse(text = response$choices$text))
       } else {
         plot <- eval(parse(text = response$choices$text))
-        structure(list(command = str2lang(response$choices$text), plot = plot), class = "chatterplot")
+        structure(list(code = str2lang(response$choices$text), plot = plot), class = "chatterplot")
       }
 
       # else do not remember my current input
@@ -222,7 +222,46 @@ chatter.create <- function(model = "text-davinci-003",
         eval(parse(text = response$choices$text))
       } else {
         plot <- eval(parse(text = response$choices$text))
-        structure(list(command = str2lang(response$choices$text), plot = plot), class = "chatterplot")
+        structure(list(code = str2lang(response$choices$text), plot = plot), class = "chatterplot")
+      }
+    }
+  }
+
+  chatter.do <<- function(input, echo = FALSE, feed = FALSE, run = FALSE, ...) {
+    input <- paste0("Use R. Do not include '<code>' in the reply. Only reply with code.\n", input, "\n")
+
+    if (feed) {
+      chatter.feed(input)
+
+      response <- openai::create_completion(
+        prompt = chatter$input,
+        engine_id = chatter$model,
+        temperature = chatter$temperature,
+        max_tokens = chatter$max_tokens,
+        echo = echo, ...
+      )
+      if (run) {
+        print(response$choices$text)
+        eval(parse(text = response$choices$text))
+      } else {
+        structure(list(code = str2lang(response$choices$text)), class = "chatterdo")
+      }
+
+      # else do not remember my current input
+    } else {
+      new_input <- paste0(chatter$input, "\n", input, "\n")
+      response <- openai::create_completion(
+        prompt = new_input,
+        engine_id = chatter$model,
+        temperature = chatter$temperature,
+        max_tokens = chatter$max_tokens,
+        echo = echo, ...
+      )
+      if (run) {
+        print(response$choices$text)
+        eval(parse(text = response$choices$text))
+      } else {
+        structure(list(code = str2lang(response$choices$text)), class = "chatterdo")
       }
     }
   }
