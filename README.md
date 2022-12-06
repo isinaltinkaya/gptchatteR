@@ -132,5 +132,6 @@ chatter.feed("I have a dataframe df")
 chatter.plot("plot histogram of rt using ggplot with df")
 ```
 
-Acknowledgements
-This package uses OpenAI's ChatGPT model, which is an implementation of the GPT-3 architecture. Thank you to OpenAI for making this technology available to the public. ChatGPT also helped me write this file.
+## Acknowledgements
+
+This package uses OpenAI's ChatGPT model, which is an implementation of the GPT-3 architecture. Thank you to OpenAI for making this technology available to the public. Special thanks to ChatGPT for helping me write this file.
