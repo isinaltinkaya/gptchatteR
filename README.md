@@ -1,6 +1,6 @@
 # gptchatteR
-An experimental and unofficial wrapper for interacting with ChatGPT in R.
-
+An experimental and unofficial wrapper for interacting with OpenAI GPT models in R. 
+gptchatteR uses the `openai` library to handle the OpenAI API endpoints, and defaults to the `text-davinci-003` model.
 
 ## Installation
 
