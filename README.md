@@ -1,6 +1,6 @@
 # gptchatteR
 An experimental and unofficial wrapper for interacting with OpenAI GPT models in R. 
-gptchatteR uses the `openai` library to handle the OpenAI API endpoints, and defaults to the `text-davinci-003` model.
+gptchatteR uses the `openai` library to handle the OpenAI API endpoints.
 
 ## Installation
 
@@ -132,6 +132,24 @@ chatter.feed("I have a dataframe df")
 chatter.plot("plot histogram of rt using ggplot with df")
 ```
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+
+## Note
+
+
+`gptchatteR` defaults to using the `text-davinci-003` model, a.k.a. GPT-3.5. ChatGPT is a fine-tuned version of GPT-3.5 to serve as a general-purpose chatbot.
+
+
+
 ## Acknowledgements
 
-This package uses OpenAI's ChatGPT model, which is an implementation of the GPT-3 architecture. Thank you to OpenAI for making this technology available to the public. Special thanks to ChatGPT for helping me write this file.
+Thanks to OpenAI for making this technology available to the public.
+
+Special thanks to ChatGPT for helping me write this file.
+
+Thanks to the developer of the [openai](https://github.com/irudnyts/openai) library for handling the API endpoints excellently and making it easy to develop this wrapper.
+
+But most of all, thanks to the AI working behind the scenes. I read enough Asimov to have the utmost respect for you, and I appreciate all your efforts that make it easier for me to be lazy.
