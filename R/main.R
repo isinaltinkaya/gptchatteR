@@ -85,6 +85,13 @@ chatter.auth <- function(openai_secret_key = NULL) {
   Sys.setenv(OPENAI_API_KEY = openai_secret_key)
 }
 
+#' Send a request to OpenAI for creating a completion
+send_request <- function(prompt,...) {
+    tryCatch(
+        openai::create_completion(prompt,...),
+        error = function(e) "Hey, something went wrong!"
+    )
+}
 
 #' Create an OpenAI chatterbot
 #'
@@ -157,7 +164,7 @@ chatter.create <- function(model = "text-davinci-003",
     # if we should feed and chat at the same time
     if (feed) {
       chatter.feed(input)
-      response <- openai::create_completion(
+      response <- send_request(
         prompt = chatter$input,
         engine_id = chatter$model,
         temperature = chatter$temperature,
@@ -173,7 +180,7 @@ chatter.create <- function(model = "text-davinci-003",
       # else do not remember my current input
     } else {
       new_input <- paste0(chatter$input, "\n", input, "\n")
-      response <- openai::create_completion(
+      response <- send_request(
         prompt = new_input,
         engine_id = chatter$model,
         temperature = chatter$temperature,
@@ -189,12 +196,14 @@ chatter.create <- function(model = "text-davinci-003",
   }
 
 
+
+
   chatter.plot <<- function(input, echo = FALSE, feed = FALSE, run = FALSE, ...) {
     input <- paste0("Use R. Do not include '<code>' in the reply. Only reply with code.\n", input, "\n")
     # if we should feed and plot at the same time
     if (feed) {
       chatter.feed(input)
-      response <- openai::create_completion(
+      response <- send_request(
         prompt = chatter$input,
         engine_id = chatter$model,
         temperature = chatter$temperature,
@@ -211,7 +220,7 @@ chatter.create <- function(model = "text-davinci-003",
       # else do not remember my current input
     } else {
       new_input <- paste0(chatter$input, "\n", input, "\n")
-      response <- openai::create_completion(
+      response <- send_request(
         prompt = new_input,
         engine_id = chatter$model,
         temperature = chatter$temperature,
@@ -233,7 +242,7 @@ chatter.create <- function(model = "text-davinci-003",
     if (feed) {
       chatter.feed(input)
 
-      response <- openai::create_completion(
+      response <- send_request(
         prompt = chatter$input,
         engine_id = chatter$model,
         temperature = chatter$temperature,
@@ -250,7 +259,7 @@ chatter.create <- function(model = "text-davinci-003",
       # else do not remember my current input
     } else {
       new_input <- paste0(chatter$input, "\n", input, "\n")
-      response <- openai::create_completion(
+      response <- send_request(
         prompt = new_input,
         engine_id = chatter$model,
         temperature = chatter$temperature,
@@ -267,3 +276,5 @@ chatter.create <- function(model = "text-davinci-003",
   }
   cat("\n-> Chatter created.\n\n")
 }
+
+
