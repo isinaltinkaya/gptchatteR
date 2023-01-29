@@ -139,9 +139,19 @@ This package is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Note
 
-
 `gptchatteR` defaults to using the `text-davinci-003` model, a.k.a. GPT-3.5. ChatGPT is a fine-tuned version of GPT-3.5 to serve as a general-purpose chatbot.
 
+
+___
+
+
+# FAQ - Frequently asked questions
+
+### 1- My output is truncated
+
+Try using a higher value for the maximum number of tokens (i.e. `max_tokens` parameter). By default, `max_tokens` is 100, which can be quite low if the answer is too long or if your chat history was too long.
+
+___
 
 
 ## Acknowledgements
