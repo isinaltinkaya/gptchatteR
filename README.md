@@ -62,6 +62,14 @@ You can use the `chatter.chat` function to send messages to ChatGPT and receive 
 chatter.chat("Hello, ChatGPT!")
 ```
 
+You can use the `return_response=TRUE` to return the full response, and save it as an object:
+
+```
+chat<-chatter.chat("What's the difference between a cat and a dog?",return_response=TRUE)
+chat$choices[[1]]
+[1] "\nThe main difference between cats and dogs is their temperaments. Cats tend to be more independent and aloof, while dogs are typically more social and loyal. Dogs are often seen as more obedient and trainable, while cats can be more unpredictable. Cats also tend to be more solitary, while dogs are often seen as pack animals."
+```
+
 ### &#8594; Plot with chatter
 
 The `chatter.plot` function can be used to generate plots based on the input data and the ChatGPT response. For example, to create a scatterplot of a dataframe named df with columns A and B, you could use the following code:
