@@ -142,7 +142,7 @@ chatter.plot("plot histogram of rt using ggplot with df")
 
 ## License
 
-This package is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This package is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
 
 
 ## Note
