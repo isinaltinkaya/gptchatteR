@@ -49,6 +49,8 @@ Your chatter is now ready for use!
 
 
 ## Usage
+could not find function "chatter.chat"
+
 
 ```R
 library(gptchatteR)
@@ -158,6 +160,18 @@ ___
 ### 1- My output is truncated
 
 Try using a higher value for the maximum number of tokens (i.e. `max_tokens` parameter). By default, `max_tokens` is 100, which can be quite low if the answer is too long or if your chat history was too long.
+
+### 2- I get the following error `could not find function "chatter.chat"`
+
+Make sure you created your chatter using `chatter.create()`.
+
+The correct order of commands to initialize the chatbot is:
+
+```R
+chatter.auth("XXXXXXXXXXXXXXXX")  # first authenticate your chatter
+chatter.create()                  # then create your chatter
+chatter.chat("Hello, ChatGPT!")   # chatter is now ready to use!
+```
 
 ___
 
